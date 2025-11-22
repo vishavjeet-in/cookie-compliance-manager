@@ -1,0 +1,193 @@
+/**
+ * Frontend Styles
+ *
+ * @package Cookie_Compliance_Manager
+ */
+
+/* Cookie Banner Base Styles */
+.wccm-cookie-banner {
+    position: fixed;
+    z-index: 999999;
+    width: 100%;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Banner Content */
+.wccm-banner-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Banner Message */
+.wccm-banner-message {
+    flex: 1 1 auto;
+    min-width: 250px;
+}
+
+.wccm-banner-message p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Banner Buttons */
+.wccm-banner-buttons {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+/* Button Styles */
+.wccm-cookie-banner button {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.wccm-accept-btn {
+    color: #ffffff;
+}
+
+.wccm-accept-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.wccm-reject-btn {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.wccm-reject-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Position: Bottom Full Width */
+.wccm-position-bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+/* Position: Bottom Left */
+.wccm-position-left {
+    bottom: 20px;
+    left: 20px;
+    right: auto;
+    width: auto;
+    max-width: 400px;
+    border-radius: 8px;
+}
+
+.wccm-position-left .wccm-banner-content {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.wccm-position-left .wccm-banner-buttons {
+    width: 100%;
+    justify-content: flex-start;
+}
+
+/* Position: Bottom Right */
+.wccm-position-right {
+    bottom: 20px;
+    right: 20px;
+    left: auto;
+    width: auto;
+    max-width: 400px;
+    border-radius: 8px;
+}
+
+.wccm-position-right .wccm-banner-content {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.wccm-position-right .wccm-banner-buttons {
+    width: 100%;
+    justify-content: flex-start;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .wccm-banner-content {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .wccm-banner-buttons {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .wccm-cookie-banner button {
+        width: 100%;
+    }
+
+    .wccm-position-left,
+    .wccm-position-right {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        max-width: 100%;
+        border-radius: 0;
+    }
+}
+
+/* Accessibility */
+.wccm-cookie-banner button:focus {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* Animation */
+@keyframes wccmSlideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes wccmSlideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes wccmSlideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
