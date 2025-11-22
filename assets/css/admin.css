@@ -1,0 +1,125 @@
+.wccm-card-row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 16px;
+	width: 60px;
+	border-right: 1px solid #f0f0f1;
+	align-content: center;
+	flex-wrap: nowrap;
+	height: 65px;
+	justify-content: center;
+}
+.wccm-card-icon {
+	flex-shrink: 0;
+}
+.wccm-card-text {
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	padding: 10px 5px;
+}
+/* Cookie Compliance Manager Admin Styles */
+.wccm-logs-table {
+	border-collapse: separate;
+	border-spacing: 0;
+
+	.wccm-cards {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 24px;
+		margin-bottom: 32px;
+	}
+	.wccm-card {
+		background: #fff;
+		border-radius: 14px;
+		box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+		padding: 24px 32px 20px 32px;
+		flex: 1 1 220px;
+		min-width: 220px;
+		max-width: 320px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		position: relative;
+		overflow: hidden;
+		transition: box-shadow 0.2s;
+	}
+	.wccm-card:hover {
+		box-shadow: 0 4px 18px rgba(0,0,0,0.13);
+	}
+	.wccm-card-icon {
+		margin-bottom: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+	}
+	.wccm-card-title {
+		font-size: 15px;
+		color: #888;
+		margin-bottom: 4px;
+		font-weight: 600;
+		letter-spacing: 0.01em;
+	}
+	.wccm-card-value {
+		font-size: 32px;
+		font-weight: 800;
+		color: #222;
+		margin-bottom: 0;
+	}
+	.wccm-card-accepted .wccm-card-value { color: #27ae60; }
+	.wccm-card-rejected .wccm-card-value { color: #e74c3c; }
+	.wccm-card-total .wccm-card-value { color: #0073aa; }
+	.wccm-card-week .wccm-card-value { color: #6c63ff; }
+	.wccm-card-month .wccm-card-value { color: #f39c12; }
+	.wccm-card-year .wccm-card-value { color: #00bcd4; }
+
+	@media (max-width: 1100px) {
+		.wccm-cards { flex-wrap: wrap; gap: 16px; }
+		.wccm-card { min-width: 180px; padding: 18px 12px 14px 12px; }
+	}
+	@media (max-width: 700px) {
+		.wccm-cards { flex-direction: column; gap: 12px; }
+		.wccm-card { max-width: 100%; min-width: 0; }
+	}
+}
+.wccm-logs-table .wccm-status-accepted span {
+	color: #fff;
+	font-weight: 400;
+	background: #27ae60;
+	padding: 8px 15px;
+	border-radius: 10px;
+}
+.wccm-logs-table .wccm-status-rejected span {
+	color: #fff;
+	font-weight: 300;
+	background: #e74c3c;
+	padding: 8px 15px;
+	border-radius: 10px;
+}
+.wccm-logs-table .wccm-status-other {
+	color: #888;
+	font-weight: bold;
+}
+.wccm-logs-table thead th, .wccm-logs-table tbody td {
+	vertical-align: middle;
+}
+.wccm-logs-table td, .wccm-logs-table th {
+	transition: background 0.2s;
+}
+.wccm-logs-table .wccm-logs-empty {
+	text-align: center;
+	color: #888;
+	font-style: italic;
+}
+.wccm-logs-table .wccm-logs-header {
+	font-size: 18px;
+	font-weight: 700;
+	background: #f1f5f9;
+}

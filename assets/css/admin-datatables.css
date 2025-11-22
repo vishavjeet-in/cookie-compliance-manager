@@ -1,0 +1,42 @@
+/* DataTables CSS for Cookie Compliance Manager Admin */
+@import url('https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css');
+@import url('https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css');
+
+.wccm-cards {
+	display: flex;
+	gap: 24px;
+	margin-bottom: 24px;
+}
+.wccm-card {
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+	padding: 0px 0px;
+	flex: 1;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	align-content: center;
+	flex-wrap: nowrap;
+}
+.wccm-card-title {
+	font-size: 14px;
+	color: #222;
+	margin-bottom: 10px;
+	font-weight: 500;
+}
+.wccm-card-value {
+	font-size: 24px;
+	font-weight: 700;
+	color: #222;
+}
+.wccm-card-accepted .wccm-card-value { color: #27ae60; }
+.wccm-card-rejected .wccm-card-value { color: #e74c3c; }
+.wccm-card-total .wccm-card-value { color: #0073aa; }
+
+/* Responsive for cards */
+@media (max-width: 900px) {
+	.wccm-cards { flex-direction: column; gap: 16px; }
+	.wccm-card { padding: 16px 18px; }
+}

@@ -75,13 +75,10 @@ class WCCM_Plugin {
 	/**
 	 * Initialize hooks.
 	 */
-	private function init_hooks() {
-		if ( is_admin() ) {
-			WCCM_Admin::get_instance();
-		} else {
-			WCCM_Frontend::get_instance();
-		}
-	}
+	   private function init_hooks() {
+		   WCCM_Admin::get_instance();
+		   WCCM_Frontend::get_instance();
+	   }
 
 	/**
 	 * Activation hook.
@@ -98,10 +95,35 @@ class WCCM_Plugin {
 			'button_color'     => '#27ae60',
 		);
 
-		if ( ! get_option( 'wccm_settings' ) ) {
-			add_option( 'wccm_settings', $default_options );
-		}
-	}
+		   if ( ! get_option( 'wccm_settings' ) ) {
+			   add_option( 'wccm_settings', $default_options );
+		   }
+
+		   // Create custom table for cookie consent logs.
+		   global $wpdb;
+		   $table_name = $wpdb->prefix . 'wccm_cookie_logs';
+		   $charset_collate = $wpdb->get_charset_collate();
+
+		   require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		   $sql = "CREATE TABLE $table_name (
+			   id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+			   date datetime NOT NULL,
+			   session_id varchar(64) NOT NULL,
+			   status varchar(16) NOT NULL,
+			   ip_address varchar(45) NOT NULL,
+			   landing_page text NOT NULL,
+			   source varchar(255) DEFAULT '' NOT NULL,
+			   medium varchar(255) DEFAULT '' NOT NULL,
+			   campaign varchar(255) DEFAULT '' NOT NULL,
+			   referrer text DEFAULT '' NOT NULL,
+			   device varchar(64) DEFAULT '' NOT NULL,
+			   PRIMARY KEY  (id),
+			   KEY session_id (session_id),
+			   KEY status (status),
+			   KEY date (date)
+		   ) $charset_collate;";
+		   dbDelta( $sql );
+	   }
 
 
 }

@@ -88,6 +88,46 @@
             var self = this;
 
             // Accept button
+            function getUTMParams() {
+                var params = {};
+                var query = window.location.search.substring(1).split('&');
+                for (var i = 0; i < query.length; i++) {
+                    var pair = query[i].split('=');
+                    if (pair.length === 2) {
+                        params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+                    }
+                }
+                return params;
+            }
+
+            function getDeviceType() {
+                var ua = navigator.userAgent;
+                if (/mobile/i.test(ua)) return 'Mobile';
+                if (/tablet/i.test(ua)) return 'Tablet';
+                return 'Desktop';
+            }
+
+            function sendConsent(status) {
+                var utm = getUTMParams();
+                var data = {
+                    action: 'wccm_store_consent',
+                    status: status,
+                    session_id: WCCMCookie.get('wccm_session_id') || (function(){
+                        var sid = Math.random().toString(36).substr(2, 16);
+                        WCCMCookie.set('wccm_session_id', sid, wccmSettings.cookieExpiry);
+                        return sid;
+                    })(),
+                    landing_page: window.location.pathname + window.location.search,
+                    source: utm.utm_source || '',
+                    medium: utm.utm_medium || '',
+                    campaign: utm.utm_campaign || '',
+                    referrer: document.referrer,
+                    device: getDeviceType(),
+                    nonce: wccmSettings.nonce
+                };
+                $.post(wccmSettings.ajaxUrl, data);
+            }
+
             $('#wccm-accept-btn').on('click', function(e) {
                 e.preventDefault();
                 WCCMCookie.set(
@@ -95,10 +135,27 @@
                     'accepted',
                     wccmSettings.cookieExpiry
                 );
+                sendConsent('accepted');
                 self.hideBanner();
+
+                // GTM consent and config update if GTM ID is present
+                if (typeof wccmSettings.gtmId !== 'undefined' && wccmSettings.gtmId) {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', wccmSettings.gtmId);
+                    gtag('consent', 'update', {
+                        ad_storage: 'granted',
+                        analytics_storage: 'granted',
+                        ad_user_data: 'granted',
+                        ad_personalization: 'granted',
+                        functionality_storage: 'granted',
+                        security_storage: 'granted',
+                        personalization_storage: 'granted'
+                    });
+                }
             });
 
-            // Reject button
             $('#wccm-reject-btn').on('click', function(e) {
                 e.preventDefault();
                 WCCMCookie.set(
@@ -106,6 +163,7 @@
                     'rejected',
                     wccmSettings.cookieExpiry
                 );
+                sendConsent('rejected');
                 self.hideBanner();
             });
         }
